@@ -1,0 +1,55 @@
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: #f5f3ef;
+  color: #194932;
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+/* Hiệu ứng mờ dần khi chuyển ảnh */
+.carousel-image {
+  transition: opacity 0.5s ease-in-out;
+}
+/* CSS MỚI: Hiệu ứng Siêu Mượt (Fade + Scale + Blur) */
+.carousel-image {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Chuyển động mượt như lụa */
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  backface-visibility: hidden; /* Giúp mượt hơn trên trình duyệt Mobile */
+}
+
+/* Trạng thái khi ảnh đang đổi */
+.carousel-image.changing {
+  opacity: 0;
+  transform: scale(1.05); /* Phóng to nhẹ khi ẩn đi tạo chiều sâu */
+  filter: blur(8px); /* Làm nhòe ảnh cũ */
+}
+/* Smooth Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Animation */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-out;
+}
+.stagger-container.active .stagger-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-container.active .stagger-item:nth-child(1) { transition-delay: 0.1s; }
+.stagger-container.active .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+.stagger-container.active .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+
+.mobile-container {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
